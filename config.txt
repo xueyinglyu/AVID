@@ -1,0 +1,4 @@
+threads 4
+min_sc_size 20
+max_sc_dist 10
+read_len 90
