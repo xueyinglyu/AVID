@@ -14,6 +14,7 @@
                                           
 ### 3.2 For the virus genome
 #### e.g. bwa index -a bwtsw -p HBV.fa HBV.fa
+#### <br />
 #### e.g. makeblastdb -in HBV.fa -dbtype nucl -parse_seqids -out test_data
 
 
