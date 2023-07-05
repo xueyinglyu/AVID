@@ -14,7 +14,6 @@
                                           
 ### 3.2 For the virus genome
 #### e.g. bwa index -a bwtsw -p HBV.fa HBV.fa
-#### <br />
 #### e.g. makeblastdb -in HBV.fa -dbtype nucl -parse_seqids -out test_data
 
 
@@ -24,11 +23,11 @@
 #### python AVID.py -1 test_1.fastq -2 test_2.fastq -d testdata -s test -r HBV.fa -l 10 -q 10 -t 1 -@ 1 -v hg38 -p HBV -H hg38.fa -a HBV.bed -R 100 -I 250 -T DNA
 ## 5. Parameters
 #### -1,--fastq1:
-#### fastq/fastq.gz for read1
+#### <br />fastq/fastq.gz for read1
 #### -2,--fastq2:
-#### fastq/fastq.gz for read2
+#### <br />fastq/fastq.gz for read2
 #### -d,--directory:
-#### output directory
+#### <br />output directory
 #### -s,--sample:
 #### sample ID
 #### -r,--reference:
