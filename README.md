@@ -23,11 +23,11 @@
 #### python AVID.py -1 test_1.fastq -2 test_2.fastq -d testdata -s test -r HBV.fa -l 10 -q 10 -t 1 -@ 1 -v hg38 -p HBV -H hg38.fa -a HBV.bed -R 100 -I 250 -T DNA
 ## 5. Parameters
 #### -1,--fastq1:
-#### </br>fastq/fastq.gz for read1
+#### &nbspfastq/fastq.gz for read1
 #### -2,--fastq2:
-#### </br>fastq/fastq.gz for read2
+#### &nbspfastq/fastq.gz for read2
 #### -d,--directory:
-#### </br>output directory
+#### &nbspoutput directory
 #### -s,--sample:
 #### sample ID
 #### -r,--reference:
