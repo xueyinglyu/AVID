@@ -20,6 +20,6 @@
                                         
 ## 4. Run AVID
 
-### python AVID.py -1 test_1.fastq -2 test_2.fastq -d testdata -s test -r HBV.fa -l 10 -q 10 -t 1 -@ 1 -v hg38 -p HBV -H hg38.fa -a HBV.bed -R 100 -I 250 -T DNA
+#### python AVID.py -1 test_1.fastq -2 test_2.fastq -d testdata -s test -r HBV.fa -l 10 -q 10 -t 1 -@ 1 -v hg38 -p HBV -H hg38.fa -a HBV.bed -R 100 -I 250 -T DNA
 ## 5. Parameters
 
