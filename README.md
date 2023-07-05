@@ -46,6 +46,13 @@
 #### threads of BWA
 #### -v,--version:
 #### annovar annotation version(hg19,hg38)
-####
+#### -a,--annotation:
+#### virus annotation file
+#### -R,--Readlen: 
+#### sequencing read length (e.g. 150)
+#### -I,--insert_size:
+#### DNA library fragment size
+
+
 
  
