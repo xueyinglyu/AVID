@@ -26,4 +26,26 @@
 #### fastq/fastq.gz for read1
 #### -2,--fastq2:
 #### fastq/fastq.gz for read2
+#### -d,--directory:
+#### output directory
+#### -s,--sample:
+#### sample ID
+#### -r,--reference:
+#### virus genome index by BWA
+#### -p,--pathogen:
+#### virus genome index by BLAST
+#### -H,--human:
+#### host genome index by BWA
+#### -l,--len: 
+#### minimum length of soft-clip reads for integration detection ()
+#### -q,--quality:
+#### minimum quality for BWA mapping
+#### -t,--threshold:
+#### minimum supported reads including soft-clip reads and chimeric reads for integration identification
+#### -@,--threads:
+#### threads of BWA
+#### -v,--version:
+#### annovar annotation version(hg19,hg38)
+####
+
  
