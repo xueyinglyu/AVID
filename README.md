@@ -29,29 +29,31 @@
 #### -d,--directory:
 #### &emsp;output directory
 #### -s,--sample:
-#### sample ID
+#### &emsp;sample ID
 #### -r,--reference:
-#### virus genome index by BWA
+#### &emsp;virus genome index by BWA
 #### -p,--pathogen:
-#### virus genome index by BLAST
+#### &emsp;virus genome index by BLAST
 #### -H,--human:
-#### host genome index by BWA
+#### &emsp;host genome index by BWA
 #### -l,--len: 
-#### minimum length of soft-clip reads for integration detection ()
+#### &emsp;minimum length of soft-clip reads for integration detection ()
 #### -q,--quality:
-#### minimum quality for BWA mapping
+#### &emsp;minimum quality for BWA mapping
 #### -t,--threshold:
-#### minimum supported reads including soft-clip reads and chimeric reads for integration identification
+#### &emsp;minimum supported reads including soft-clip reads and chimeric reads for integration identification
 #### -@,--threads:
-#### threads of BWA
+#### &emsp;threads of BWA
 #### -v,--version:
-#### annovar annotation version(hg19,hg38)
+#### &emsp;annovar annotation version(hg19,hg38)
 #### -a,--annotation:
-#### virus annotation file
+#### &emsp;virus annotation file
 #### -R,--Readlen: 
-#### sequencing read length (e.g. 150)
+#### &emsp;sequencing read length (e.g. 150)
 #### -I,--insert_size:
-#### DNA library fragment size
+#### &emsp;DNA library fragment size
+#### -T,--data_type:
+#### &emsp;aligner difference, DNA (BWA) or RNA (STAR)
 
 
 
