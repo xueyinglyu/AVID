@@ -55,6 +55,32 @@
 #### -T,--data_type:
 #### &emsp;aligner difference, DNA (BWA) or RNA (STAR)
 
+## 5. Output format
+#### sample.virusclip2.final.txt
+#### chr_human: chromosome of breakpoint in human genome
+#### breakpoint_human:the breakpoint location in human genome
+#### sample: chr_virus:chromosome of breakpoint in virus genome
+#### breakpoint_virus:the breakpoint location in virus genome
+#### breaktype:breakpoint type, upstream or downstrem of the breakpoint
+#### virus_direction:the strand of virus(positive or negative) inserted into human genome(refer to human positive strand) identified by soft-clip reads
+#### chr_human_chimeric:the chromosome of integration region in human genome identified by clustering chimeric reads 
+#### start_human_chimeric:the start site of the cluster of chimeric reads in human genome
+#### end_human_chimeric:the end site of the cluster of chimeric reads in human genome
+#### start_virus_chimeric:the start site of the cluster of chimeric reads in virus genome
+#### end_virus_chimeric:the end site of the cluster of chimeric reads in virus genome
+#### support_reads_softclip:the number of soft-clip reads supporting the breakpoint
+#### support_reads_chimeric:the number of chimeric reads supporting the breakpoint
+#### total_reads: the total number of soft-clip reads and chimeric reads supporting the breakpoint
+#### repeat_region: whether the breakpoint is supported by reads with multi-site mapping (Yes or No). 
+#### region_human:breakpoint in the region of human genome according to annovar annotation result
+#### gene_human:breakpoint to the nearest gene in human genome according to annovar annotation result
+#### gene_virus:breakpoint to the nearest gene in virus genome according to virus annotation file providing by users
+
+
+
+
+
+
 
 
  
