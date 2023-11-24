@@ -1,6 +1,6 @@
 # AVID – Accurate Viral Integration Detector
 
-#### AVID is a sensitive and accurate tools for viral integration detection by next generation sequencing data.
+#### AVID is a sensitive and accurate tool for viral integration detection by next generation sequencing data.
 
 ## 1. Installation
 #### 1.1 Install by conda
