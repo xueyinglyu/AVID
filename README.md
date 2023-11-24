@@ -8,24 +8,17 @@
 ##### conda install -c lyuxueying avid
 #### OR
 #### 1.2 Directly download from github
+#### git clone https://github.com/xueyinglyu/AVID.git
 
 
-## 2. Run test data
-#### sh run_test.sh
-## 3. Build index
-### 3.1 For the host genome
-#### e.g. bwa index -a bwtsw -p hg38.fa hg38.fa
-
-                                          
-### 3.2 For the virus genome
-#### e.g. bwa index -a bwtsw -p HBV.fa HBV.fa
-#### e.g. makeblastdb -in HBV.fa -dbtype nucl -parse_seqids -out test_data
 
 
-## 4. Test AVID
+## 2. Test AVID
 
 ### Test AIVD through conda
 #### [avid env directory]: e.g. /home/zhangsan/anaconda3/envs/avid/.
+#### [outdir]: output dir
+####
 #### python [avid env directory]/bin/AVID/AVID.py 
 #### -1 [avid env directory]/bin/AVID/testdata/test_1.fastq 
 #### -2 [avid env directory]/bin/AVID/testdata/test_2.fastq 
@@ -36,16 +29,35 @@
 #### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -I 250 -T DNA
 
 ### Test AVID through downloaded files
+#### [your directory]: your dir where download AVID
+#### [outdir]: output dir
+####
+#### python [your directory]/AVID/AVID.py 
+#### -1 [your directory]/AVID/testdata/test_1.fastq 
+#### -2 [your directory]/AVID/testdata/test_2.fastq 
+#### -d [outdir] -s test -r [your directory]/AVID/testdata/DQ089769.fasta 
+#### -p [your directory]/AVID/testdata/DQ089769 
+#### -H [your directory]/AVID/testdata/chr5.fa 
+#### -a [your directory]/AVID/testdata/DQ089769.bed 
+#### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -I 250 -T DNA
 
 
+## 3. Build index
+### 3.1 For the host genome
+#### e.g. bwa index -a bwtsw -p hg38.fa hg38.fa
+
+                                          
+### 3.2 For the virus genome
+#### e.g. bwa index -a bwtsw -p HBV.fa HBV.fa
+#### e.g. makeblastdb -in HBV.fa -dbtype nucl -parse_seqids -out test_data
 
 
 
 																				
-## 5. Run AVID
+## 4. Run AVID
 
 #### python [avid env directory]/bin/AVID/AVID.py -1 test_1.fastq -2 test_2.fastq -d testdata -s test -r HBV.fa -l 10 -q 10 -t 1 -@ 1 -v hg38 -p HBV -H hg38.fa -a HBV.bed -R 100 -I 250 -T DNA
-## 6. Parameters
+## 5. Parameters
 #### -1,--fastq1:
 #### &emsp;fastq/fastq.gz for read1
 #### -2,--fastq2:
@@ -79,7 +91,7 @@
 #### -T,--data_type:
 #### &emsp;aligner difference, DNA (BWA) or RNA (STAR)
 
-## 7. Output format
+## 6. Output format
 ## sample.virusclip2.final.txt
 #### chr_human: 
 #### &emsp;chromosome of breakpoint in human genome
