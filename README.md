@@ -55,7 +55,7 @@
 
 																				
 ## 4. Run AVID
-### Please refer to test AVID step
+### Please refer to 2.Test AVID step
 
 #### python [your dir]/AVID/AVID.py 
 #### -1 [your dir]/AVID/testdata/test_1.fastq 
