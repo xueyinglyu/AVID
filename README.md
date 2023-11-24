@@ -15,7 +15,7 @@
 
 ## 2. Test AVID
 
-### Test AIVD through conda
+### 2.1 Test AIVD through conda
 #### [avid env dir]: e.g. /home/zhangsan/anaconda3/envs/avid/.
 #### [outdir]: output directory
 ####
@@ -28,7 +28,7 @@
 #### -a [avid env dir]/bin/AVID/testdata/DQ089769.bed 
 #### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -I 250 -T DNA
 
-### Test AVID through downloaded files
+### 2.2 Test AVID through downloaded files
 #### [your dir]: your directory where download AVID
 #### [outdir]: output directory
 ####
