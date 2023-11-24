@@ -3,8 +3,11 @@
 #### AVID is a sensitive and accurate tools for viral integration detection by next generation sequencing data.
 
 ## 1. Installation
+#### 1.1 Install by conda
 ##### conda config --env --add channels lyuxueying
 ##### conda install -c lyuxueying avid
+#### OR
+#### 1.2 Directly download from github
 
 
 ## 2. Run test data
@@ -20,10 +23,25 @@
 
 
 ## 4. Test AVID
-#### [avid env directory]: e.g. /home/zhangsan/anaconda3/envs/avid/.
 
-#### python [avid env directory]/bin/AVID/AVID.py -1 [avid env directory]/bin/AVID/testdata/test_1.fastq -2 [avid env directory]/bin/AVID/testdata/test_2.fastq -d [outdir] -s test -r [avid env directory]/bin/AVID/testdata/DQ089769.fasta -l 10 -q 10 -t 1 -@ 1 -v hg38 -p [avid env directory]/bin/AVID/testdata/DQ089769 -H [avid env directory]/bin/AVID/testdata/chr5.fa -a [avid env directory]/bin/AVID/testdata/DQ089769.bed -R 100 -I 250 -T DNA
-                                        
+### Test AIVD through conda
+#### [avid env directory]: e.g. /home/zhangsan/anaconda3/envs/avid/.
+#### python [avid env directory]/bin/AVID/AVID.py 
+#### -1 [avid env directory]/bin/AVID/testdata/test_1.fastq 
+#### -2 [avid env directory]/bin/AVID/testdata/test_2.fastq 
+#### -d [outdir] -s test -r [avid env directory]/bin/AVID/testdata/DQ089769.fasta 
+#### -p [avid env directory]/bin/AVID/testdata/DQ089769 
+#### -H [avid env directory]/bin/AVID/testdata/chr5.fa 
+#### -a [avid env directory]/bin/AVID/testdata/DQ089769.bed 
+#### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -I 250 -T DNA
+
+### Test AVID through downloaded files
+
+
+
+
+
+																				
 ## 5. Run AVID
 
 #### python [avid env directory]/bin/AVID/AVID.py -1 test_1.fastq -2 test_2.fastq -d testdata -s test -r HBV.fa -l 10 -q 10 -t 1 -@ 1 -v hg38 -p HBV -H hg38.fa -a HBV.bed -R 100 -I 250 -T DNA
