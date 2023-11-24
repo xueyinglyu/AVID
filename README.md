@@ -3,7 +3,9 @@
 #### AVID is a sensitive and accurate tools for viral integration detection by next generation sequencing data.
 
 ## 1. Installation
+##### conda config --env --add channels lyuxueying
 ##### conda install -c lyuxueying avid
+
 
 ## 2. Run test data
 #### sh run_test.sh
@@ -17,11 +19,15 @@
 #### e.g. makeblastdb -in HBV.fa -dbtype nucl -parse_seqids -out test_data
 
 
-                                        
-## 4. Run AVID
+## 4. Test AVID
+#### avid env directory: e.g. /home/zhangsan/anaconda3/envs/avid/.
 
-#### python AVID.py -1 test_1.fastq -2 test_2.fastq -d testdata -s test -r HBV.fa -l 10 -q 10 -t 1 -@ 1 -v hg38 -p HBV -H hg38.fa -a HBV.bed -R 100 -I 250 -T DNA
-## 5. Parameters
+#### python [avid env directory]/bin/AVID/AVID.py -1 [avid env directory]/bin/AVID/testdata/test_1.fastq -2 [avid env directory]/bin/AVID/testdata/test_2.fastq -d [outdir] -s test -r [avid env directory]/bin/AVID/testdata/DQ089769.fasta -l 10 -q 10 -t 1 -@ 1 -v hg38 -p [avid env directory]/bin/AVID/testdata/DQ089769 -H [avid env directory]/bin/AVID/testdata/chr5.fa -a [avid env directory]/bin/AVID/testdata/DQ089769.bed -R 100 -I 250 -T DNA
+                                        
+## 5. Run AVID
+
+#### python [avid env directory]/bin/AVID/AVID.py -1 test_1.fastq -2 test_2.fastq -d testdata -s test -r HBV.fa -l 10 -q 10 -t 1 -@ 1 -v hg38 -p HBV -H hg38.fa -a HBV.bed -R 100 -I 250 -T DNA
+## 6. Parameters
 #### -1,--fastq1:
 #### &emsp;fastq/fastq.gz for read1
 #### -2,--fastq2:
@@ -55,7 +61,7 @@
 #### -T,--data_type:
 #### &emsp;aligner difference, DNA (BWA) or RNA (STAR)
 
-## 6. Output format
+## 7. Output format
 ## sample.virusclip2.final.txt
 #### chr_human: 
 #### &emsp;chromosome of breakpoint in human genome
