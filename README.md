@@ -16,29 +16,29 @@
 ## 2. Test AVID
 
 ### Test AIVD through conda
-#### [avid env directory]: e.g. /home/zhangsan/anaconda3/envs/avid/.
-#### [outdir]: output dir
+#### [avid env dir]: e.g. /home/zhangsan/anaconda3/envs/avid/.
+#### [outdir]: output directory
 ####
-#### python [avid env directory]/bin/AVID/AVID.py 
-#### -1 [avid env directory]/bin/AVID/testdata/test_1.fastq 
-#### -2 [avid env directory]/bin/AVID/testdata/test_2.fastq 
-#### -d [outdir] -s test -r [avid env directory]/bin/AVID/testdata/DQ089769.fasta 
-#### -p [avid env directory]/bin/AVID/testdata/DQ089769 
-#### -H [avid env directory]/bin/AVID/testdata/chr5.fa 
-#### -a [avid env directory]/bin/AVID/testdata/DQ089769.bed 
+#### python [avid env dir]/bin/AVID/AVID.py 
+#### -1 [avid env dir]/bin/AVID/testdata/test_1.fastq 
+#### -2 [avid env dir/bin/AVID/testdata/test_2.fastq 
+#### -d [outdir] -s test -r [avid env dir]/bin/AVID/testdata/DQ089769.fasta 
+#### -p [avid env dir]/bin/AVID/testdata/DQ089769 
+#### -H [avid env dir]/bin/AVID/testdata/chr5.fa 
+#### -a [avid env dir]/bin/AVID/testdata/DQ089769.bed 
 #### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -I 250 -T DNA
 
 ### Test AVID through downloaded files
-#### [your directory]: your dir where download AVID
-#### [outdir]: output dir
+#### [your dir]: your directory where download AVID
+#### [outdir]: output directory
 ####
-#### python [your directory]/AVID/AVID.py 
-#### -1 [your directory]/AVID/testdata/test_1.fastq 
-#### -2 [your directory]/AVID/testdata/test_2.fastq 
-#### -d [outdir] -s test -r [your directory]/AVID/testdata/DQ089769.fasta 
-#### -p [your directory]/AVID/testdata/DQ089769 
-#### -H [your directory]/AVID/testdata/chr5.fa 
-#### -a [your directory]/AVID/testdata/DQ089769.bed 
+#### python [your dir]/AVID/AVID.py 
+#### -1 [your dir]/AVID/testdata/test_1.fastq 
+#### -2 [your dir]/AVID/testdata/test_2.fastq 
+#### -d [outdir] -s test -r [your dir]/AVID/testdata/DQ089769.fasta 
+#### -p [your dir]/AVID/testdata/DQ089769 
+#### -H [your dir]/AVID/testdata/chr5.fa 
+#### -a [your dir]/AVID/testdata/DQ089769.bed 
 #### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -I 250 -T DNA
 
 
@@ -55,8 +55,17 @@
 
 																				
 ## 4. Run AVID
+### Please refer to test AVID step
 
-#### python [avid env directory]/bin/AVID/AVID.py -1 test_1.fastq -2 test_2.fastq -d testdata -s test -r HBV.fa -l 10 -q 10 -t 1 -@ 1 -v hg38 -p HBV -H hg38.fa -a HBV.bed -R 100 -I 250 -T DNA
+#### python [your dir]/AVID/AVID.py 
+#### -1 [your dir]/AVID/testdata/test_1.fastq 
+#### -2 [your dir]/AVID/testdata/test_2.fastq 
+#### -d [outdir] -s test -r [your dir]/AVID/testdata/DQ089769.fasta 
+#### -p [your dir]/AVID/testdata/DQ089769 
+#### -H [your dir]/AVID/testdata/chr5.fa 
+#### -a [your dir]/AVID/testdata/DQ089769.bed 
+#### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -I 250 -T DNA
+
 ## 5. Parameters
 #### -1,--fastq1:
 #### &emsp;fastq/fastq.gz for read1
