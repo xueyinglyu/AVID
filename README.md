@@ -20,7 +20,7 @@
 
 
 ## 4. Test AVID
-#### avid env directory: e.g. /home/zhangsan/anaconda3/envs/avid/.
+#### [avid env directory]: e.g. /home/zhangsan/anaconda3/envs/avid/.
 
 #### python [avid env directory]/bin/AVID/AVID.py -1 [avid env directory]/bin/AVID/testdata/test_1.fastq -2 [avid env directory]/bin/AVID/testdata/test_2.fastq -d [outdir] -s test -r [avid env directory]/bin/AVID/testdata/DQ089769.fasta -l 10 -q 10 -t 1 -@ 1 -v hg38 -p [avid env directory]/bin/AVID/testdata/DQ089769 -H [avid env directory]/bin/AVID/testdata/chr5.fa -a [avid env directory]/bin/AVID/testdata/DQ089769.bed -R 100 -I 250 -T DNA
                                         
