@@ -68,13 +68,13 @@ def main ():
 		os.system(mapping_cmd)
 
 	def STAR_fasta(fasta,outfile,sample,threads,outdir):
-		mapping_cmd="~/anaconda3/envs/lxy/bin/STAR --runThreadN %s --genomeDir /pathowh01/disk1/lyuxy/HBV/reference/Human/STAR --outFileNamePrefix %s/%s --readFilesIn %s --outSAMtype SAM --outSAMmode SAM"%(threads,outdir,sample,fasta)
+		mapping_cmd="%s/STAR --runThreadN %s --genomeDir /pathowh01/disk1/lyuxy/HBV/reference/Human/STAR --outFileNamePrefix %s/%s --readFilesIn %s --outSAMtype SAM --outSAMmode SAM"%(Virusclip_PATH,threads,outdir,sample,fasta)
 		os.system(mapping_cmd)
 		os.system("mv %s/%sAligned.out.sam %s"%(outdir,sample,outfile))
 
 	def BLASTN(fasta,reference,outfile,threads):
 		#print("blastn -db %s -query %s -out %s -outfmt \"6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand\" -max_target_seqs 5 -word_size 11 -best_hit_overhang 0.1 -num_threads %s"%(reference,fasta,outfile,threads))
-		os.system("blastn -db %s -query %s -out %s -outfmt \"6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand\" -max_target_seqs 5 -word_size 11 -best_hit_overhang 0.1 -num_threads %s"%(reference,fasta,outfile,threads))
+		os.system("%s/blastn -db %s -query %s -out %s -outfmt \"6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand\" -max_target_seqs 5 -word_size 11 -best_hit_overhang 0.1 -num_threads %s"%(Virusclip_PATH,reference,fasta,outfile,threads))
 
 	def InsertSize(samfile): # type3 paired end mapped bam file
 		with pysam.AlignmentFile(samfile,"r") as fh:
