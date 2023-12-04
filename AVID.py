@@ -166,8 +166,8 @@ def main ():
 		os.system("python %s/merge_annotation.py -H %s/%s.variant_function -v %s -i %s/all_type_result.out -o %s/%s.virusclip2.txt"%(Virusclip_PATH,directory,sample,virus_annotation,directory,directory,sample))
 		os.system("python %s/merge_repeat.py -i %s/%s.virusclip2.txt -o %s/%s.virusclip2.final.txt -t %s"%(Virusclip_PATH,directory,sample,directory,sample,threshold))
 ########################## install samtools	########################## 	
-		os.system("ls %s/*.virus.sam | while read f;do(outfile=${f/sam/insert}; samtools stat $f | grep ^IS | cut -f 2- > $outfile);done"%(directory))
-		os.system("Rscript %s/VC2_visualization.R %s %s %s"%(Virusclip_PATH,directory,virus_len,human_version))
+		os.system("ls %s/*.virus.sam | while read f;do(outfile=${f/sam/insert}; %s/samtools stat $f | grep ^IS | cut -f 2- > $outfile);done"%(directory,Virusclip_PATH))
+		os.system("%s/Rscript %s/VC2_visualization.R %s %s %s"%(Virusclip_PATH,Virusclip_PATH,directory,virus_len,human_version))
 	else:
 		os.system("touch %s/%s.virusclip2.txt"%(directory,sample))
 		os.system("touch %s/%s.virusclip2.final.txt"%(directory,sample))
