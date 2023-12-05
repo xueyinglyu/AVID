@@ -28,7 +28,7 @@
 #### -a [avid env dir]/bin/AVID/testdata/DQ089769.bed 
 #### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -I 250 -T DNA
 
-### 2.2 Test AVID through downloaded files
+### 2.2 Test AVID through github
 #### [your dir]: your directory where download AVID
 #### [outdir]: output directory
 ####
