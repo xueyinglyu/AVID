@@ -3,11 +3,7 @@
 #### AVID is a sensitive and accurate tool for viral integration detection by next generation sequencing data.
 
 ## 1. Installation
-#### 1.1 Install by conda
-##### conda config --env --add channels lyuxueying
-##### conda install -c lyuxueying avid
-#### OR
-#### 1.2 Directly download from github
+
 #### git clone https://github.com/xueyinglyu/AVID.git
 #### export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
 #### [your dir]: your directory where download AVID
