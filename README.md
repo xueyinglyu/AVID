@@ -18,23 +18,6 @@
 
 ## 2. Test AVID
 
-### 2.1 Test AIVD through conda
-#### [avid env dir]: e.g. /home/zhangsan/anaconda3/envs/avid/.
-#### [outdir]: output directory
-####
-#### python [avid env dir]/bin/AVID/AVID.py 
-#### -1 [avid env dir]/bin/AVID/testdata/test_1.fastq 
-#### -2 [avid env dir/bin/AVID/testdata/test_2.fastq 
-#### -d [outdir] -s test -r [avid env dir]/bin/AVID/testdata/DQ089769.fasta 
-#### -p [avid env dir]/bin/AVID/testdata/DQ089769 
-#### -H [avid env dir]/bin/AVID/testdata/chr5.fa 
-#### -a [avid env dir]/bin/AVID/testdata/DQ089769.bed 
-#### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -I 250 -T DNA
-
-
-#### (Tip: capitalize -I 250)
-
-### 2.2 Test AVID through github
 #### [your dir]: your directory where download AVID
 #### [outdir]: output directory
 ####
