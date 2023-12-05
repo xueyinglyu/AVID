@@ -9,6 +9,9 @@
 #### OR
 #### 1.2 Directly download from github
 #### git clone https://github.com/xueyinglyu/AVID.git
+#### export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
+#### [your dir]: your directory where download AVID
+
 
 
 
