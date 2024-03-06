@@ -81,7 +81,7 @@
 #### &emsp;virus annotation file
 #### -R,--Readlen: 
 #### &emsp;sequencing read length (e.g. 150)
-#### -I,--insert_size:
+#### -`I`,--insert_size:
 #### &emsp;DNA library fragment size
 #### -T,--data_type:
 #### &emsp;aligner difference, DNA (BWA) or RNA (STAR)
