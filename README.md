@@ -24,7 +24,7 @@
 #### -p [your dir]/AVID/testdata/DQ089769 
 #### -H [your dir]/AVID/testdata/chr5.fa 
 #### -a [your dir]/AVID/testdata/DQ089769.bed 
-#### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -"I" 250 -T DNA
+#### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -`I` 250 -T DNA
 
 #### (Tip: capitalize -I 250)
 
