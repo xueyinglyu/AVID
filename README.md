@@ -134,7 +134,7 @@
 
 
 ## 7. Visualization
-![Alt Text](https://github.com/xueyinglyu/AVID/tree/main/testdata/circos.png)
+![Alt Text](../testdata/circos.png)
 
 
 
