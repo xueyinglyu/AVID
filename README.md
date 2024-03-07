@@ -92,8 +92,8 @@
 | chr_human | breakpoint_human | chr_virus | breakpoint_virus | breaktype | virus_direction | chr_human_chimeric | start_human_chimeric | end_human_chimeric | chr_virus_chimeric | start_virus_chimeric | end_virus_chimeric | support_reads_softclip | support_reads_chimeric | total_reads | repeat_mark | region_human | gene_human | gene_virus |
 | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |-------- | -------- | -------- |-------- |-------- | -------- | -------- |
 |chr5	|2347	|DQ089769.1	|1746	|upstream	|negative	|0	|0	|0	|0	|0	|0	|9	|0	|9	|No	|intergenic	|NONE(dist=NONE),PLEKHG4B(dist=89821)	|X|
-chr5	2465	DQ089769.1	1815	upstream	negative	0	0	0	0	0	0	7	0	7	No	intergenic	NONE(dist=NONE),PLEKHG4B(dist=89703)	X
-chr5	2669	DQ089769.1	1818	upstream	negative	0	0	0	0	0	0	9	0	9	No	intergenic	NONE(dist=NONE),PLEKHG4B(dist=89499)	X![image](https://github.com/xueyinglyu/AVID/assets/78334297/f939bcc2-78ae-40bc-847a-199208398c65)
+|chr5	|2465	|DQ089769.1	|1815	|upstream	|negative	|0	|0	|0	|0	|0	|0	|7	|0	|7	|No	|intergenic	|NONE(dist=NONE),PLEKHG4B(dist=89703)	|X|
+|chr5	|2669	|DQ089769.1	|1818	|upstream	|negative	|0	|0	|0	|0	|0	|0	|9	|0	|9	|No	|intergenic	|NONE(dist=NONE),PLEKHG4B(dist=89499)	|X|![image](https://github.com/xueyinglyu/AVID/assets/78334297/f939bcc2-78ae-40bc-847a-199208398c65)
 
 #### chr_human: 
 #### &emsp;chromosome of breakpoint in human genome
