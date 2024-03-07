@@ -133,8 +133,8 @@
 #### &emsp;breakpoint to the nearest gene in virus genome according to virus annotation file providing by users
 
 
-## 6. Visualization
-![Alt Text](https://github.com/xueyinglyu/AVID/tree/main/testdata/circos_plot.pdf)
+## 7. Visualization
+![Alt Text](https://github.com/xueyinglyu/AVID/tree/main/testdata/Screenshot 2024-03-07 at 18.56.30.png)
 
 
 
