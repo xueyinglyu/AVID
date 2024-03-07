@@ -134,7 +134,8 @@
 
 
 ## 7. Visualization
-![Alt Text](https://github.com/xueyinglyu/AVID/blob/main/virus_hist.png)
+![Viral integration breakpoint distribution](https://github.com/xueyinglyu/AVID/blob/main/circos.png)
+![Breakpoints in viral genome](https://github.com/xueyinglyu/AVID/blob/main/virus_hist.png)
 
 
 
