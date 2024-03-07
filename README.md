@@ -88,9 +88,8 @@
 
 ## 6. Output format
 ## sample.virusclip2.final.txt
-CSS
-1 2 3 4
-5 6 7 8
+SQL
+1|2|3|4
 #### chr_human: 
 #### &emsp;chromosome of breakpoint in human genome
 #### breakpoint_human:
