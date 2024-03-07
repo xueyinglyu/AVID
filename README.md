@@ -134,7 +134,7 @@
 
 
 ## 7. Visualization
-![Alt Text](https://github.com/xueyinglyu/AVID/circos.png)
+![Alt Text](https://github.com/xueyinglyu/AVID/blob/main/virus_hist.png)
 
 
 
