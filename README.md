@@ -87,7 +87,7 @@
 #### &emsp;aligner difference, DNA (BWA) or RNA (STAR)
 
 ## 6. Output format
-## sample.virusclip2.final.txt
+## sample.virusclip2.final.txt (test data result)
 
 | chr_human | breakpoint_human | chr_virus | breakpoint_virus | breaktype | virus_direction | chr_human_chimeric | start_human_chimeric | end_human_chimeric | chr_virus_chimeric | start_virus_chimeric | end_virus_chimeric | support_reads_softclip | support_reads_chimeric | total_reads | repeat_mark | region_human | gene_human | gene_virus |
 | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |-------- | -------- | -------- |-------- |-------- | -------- | -------- |
