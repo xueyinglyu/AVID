@@ -6,17 +6,17 @@
 
 ### 1.1 From conda
 
-#### Add channel:
+#### 1.1.1 Add channel:
 #### conda config --add channels lyuxueying
-#### Install AVID:
+#### 1.1.2 Install AVID:
 #### conda install lyuxueying::avid
-#### Export library:
+#### 1.1.3 Export library:
 #### export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
 
 
 ### 1.2 From github
-#### git clone https://github.com/xueyinglyu/AVID.git
-#### export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
+#### 1.2.1 git clone https://github.com/xueyinglyu/AVID.git
+#### 1.2.1 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
 #### [your dir]: your directory where download AVID
 
 
