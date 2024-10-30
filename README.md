@@ -7,7 +7,10 @@
 ### 1.1 From conda
 
 #### Add channel:
+#### conda config --add channels lyuxueying
+#### Install AVID:
 #### conda install lyuxueying::avid
+#### Export library:
 #### export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
 
 
