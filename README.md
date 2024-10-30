@@ -20,40 +20,56 @@
 ### 1.2 Github
 #### 1.2.1 git clone https://github.com/xueyinglyu/AVID.git
 #### 1.2.2 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
-#### [your dir]: your directory where download AVID
+#### ([your dir]: your directory where download AVID, e.g. export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/lyuxueying/test/AVID/")
 
 
 
 ## 2. Test AVID
-
+### AVID package includes a dataset, necessary reference, and index for testing. Users can run the command below to test the installation.
+#### 
 #### [your dir]: your directory where download AVID
 #### [outdir]: output directory
 ####
 #### python [your dir]/AVID/AVID.py 
 #### -1 [your dir]/AVID/testdata/test_1.fastq 
 #### -2 [your dir]/AVID/testdata/test_2.fastq 
-#### -d [outdir] -s test -r [your dir]/AVID/testdata/DQ089769.fasta 
+#### -d [outdir] -r [your dir]/AVID/testdata/DQ089769.fasta 
 #### -p [your dir]/AVID/testdata/DQ089769 
 #### -H [your dir]/AVID/testdata/chr5.fa 
 #### -a [your dir]/AVID/testdata/DQ089769.bed 
-#### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -`I` 250 -T DNA
+#### -l 10 -q 10 -@ 1 -R 100 -`I` 10000 -s test 
+
+#### Example:
+#### python /home/lyuxueying/anaconda3/envs/avid/bin/AVID/AVID.py 
+#### -1 /home/lyuxueying/anaconda3/envs/avid/bin/AVID/testdata/test_1.fastq 
+#### -2 /home/lyuxueying/anaconda3/envs/avid/bin/AVID/testdata/test_2.fastq 
+#### -d /home/lyuxueying/test/avid/ 
+#### -r /home/lyuxueying/anaconda3/envs/avid/bin/AVID/testdata/DQ089769.fasta 
+#### -p /home/lyuxueying/anaconda3/envs/avid/bin/AVID/testdata/DQ089769 
+#### -H /home/lyuxueying/anaconda3/envs/avid/bin/AVID/testdata/chr5.fa 
+#### -a /home/lyuxueying/anaconda3/envs/avid/bin/AVID/testdata/DQ089769.bed 
+#### -l 10 -q 10 -@ 1 -R 100 -`I` 10000 -s test 
 
 
 
 ## 3. Build index
+
+### Before running AVID, users must build the index for the host and virus genomes, respectively.
 ### 3.1 For the host genome
 #### e.g. bwa index -a bwtsw -p hg38.fa hg38.fa
 
                                           
 ### 3.2 For the virus genome
 #### e.g. bwa index -a bwtsw -p HBV.fa HBV.fa
-#### e.g. makeblastdb -in HBV.fa -dbtype nucl -parse_seqids -out test_data
+#### e.g. makeblastdb -in HBV.fa -dbtype nucl -parse_seqids -out HBV
 
-
+## 4. Annotation files
+### 4.1 Human genome
+#### Annotation files for the human genome could be download from 
 
 																				
-## 4. Run AVID
-### Please refer to 2.Test AVID step
+## 5. Run AVID
+### Once 
 
 #### python [your dir]/AVID/AVID.py 
 #### -1 [your dir]/AVID/testdata/test_1.fastq 
@@ -64,7 +80,7 @@
 #### -a [your dir]/AVID/testdata/DQ089769.bed 
 #### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -`I` 250 -T DNA
 
-## 5. Parameters
+## 6. Parameters
 #### -1,--fastq1:
 #### &emsp;fastq/fastq.gz for read1
 #### -2,--fastq2:
@@ -98,7 +114,7 @@
 #### -T,--data_type:
 #### &emsp;aligner difference, DNA (BWA) or RNA (STAR)
 
-## 6. Output format
+## 7. Output format
 ## sample.virusclip2.final.txt (test data result)
 
 | chr_human | breakpoint_human | chr_virus | breakpoint_virus | breaktype | virus_direction | chr_human_chimeric | start_human_chimeric | end_human_chimeric | chr_virus_chimeric | start_virus_chimeric | end_virus_chimeric | support_reads_softclip | support_reads_chimeric | total_reads | repeat_mark | region_human | gene_human | gene_virus |
@@ -145,7 +161,7 @@
 #### &emsp;breakpoint to the nearest gene in virus genome according to virus annotation file providing by users
 
 
-## 7. Visualization
+## 8. Visualization
 ![Viral integration breakpoint distribution](https://github.com/xueyinglyu/AVID/blob/main/circos.png)
 ![Breakpoints in viral genome](https://github.com/xueyinglyu/AVID/blob/main/virus_hist.png)
 
