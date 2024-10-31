@@ -25,7 +25,7 @@ def main ():
 	parser.add_option("-r","--reference",dest="reference",help="virus reference genome(s) fasta file for BWA")
 	parser.add_option("-p","--pathogen",dest="pathogen",help="the virus reference genome for BlastN")
 	parser.add_option("-H","--Human",dest="human_index",help="human genome bwa index")
-	parser.add_option("-l","--len",dest="minlen",help="minimum length for softclip reads")
+	parser.add_option("-l","--len",dest="minlen",default="10",help="minimum length for softclip reads")
 	parser.add_option("-q","--quality",dest="quality",help="minimum quality for BWA mapping")
 	parser.add_option("-t","--threshold",dest="threshold",default=3,help="minimum reads (softclip and chimeric reads) supported the breakpoint")
 	parser.add_option("-@","--threads",dest="threads",help="threads for BWA")
