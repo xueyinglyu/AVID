@@ -4,25 +4,11 @@
 
 # 1. Installation
 
-## 1.1 Conda
 
-### 1.1.1 Add channel:
 #### conda config --add channels lyuxueying
-### 1.1.2 Install AVID:
 #### conda create -n avid
 #### conda activate avid
 #### conda install lyuxueying::avid
-### 1.1.3 Export library:
-#### export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your conda path]/bin/AVID/"
-#### (e.g. export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/lyuxueying/anaconda3/envs/avid/bin/AVID/")
-
-
-## 1.2 Github
-#### 1.2.1 PATH=$PATH:/usr/libexec/git-core
-#### 1.2.2 git clone https://github.com/xueyinglyu/AVID.git
-#### 1.2.3 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
-#### (e.g. export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/lyuxueying/test/AVID/")
-#### [your dir]: Directory where you download AVID.
 
 
 
