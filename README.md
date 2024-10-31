@@ -13,7 +13,7 @@
 
 
 # 2. Test AVID
-## AVID package includes a dataset, necessary references, and indexs for testing. Users can directly run the command below to test the installation without any file preparation.
+### AVID package includes a dataset, necessary references, and indexs for testing. Users can directly run the command below to test the installation without any file preparation.
 #### 
 #### [your dir]: your directory where download AVID
 #### [outdir]: output directory
@@ -44,7 +44,7 @@
 
 # 3. Build index
 
-## Before running AVID, users must build the index for the host and virus genomes, respectively.
+### Before running AVID, users must build the index for the host and virus genomes, respectively.
 ## 3.1 For the host genome
 #### BWA: bwa index -a bwtsw -p hg38.fa hg38.fa
 
@@ -116,7 +116,7 @@
 #### &emsp;Activate the filtering of DNA fragment insert size (False or True, default: True)
 
 # 7. Output format
-# test.AVID.final.txt (test data result)
+## test.AVID.final.txt (test data result)
 
 | chr_human | breakpoint_human | chr_virus | breakpoint_virus | breaktype | virus_direction | chr_human_chimeric | start_human_chimeric | end_human_chimeric | chr_virus_chimeric | start_virus_chimeric | end_virus_chimeric | support_reads_softclip | support_reads_chimeric | total_reads | repeat_mark | region_human | gene_human | gene_virus |
 | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |-------- | -------- | -------- |-------- |-------- | -------- | -------- |
