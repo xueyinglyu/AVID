@@ -1,6 +1,6 @@
 # AVID – Accurate Viral Integration Detector
 
-### AVID is a sensitive and accurate tool for viral integration detection by next generation sequencing data.
+### AVID is a sensitive and accurate tool for viral integration detection by next-generation sequencing data.
 
 # 1. Installation
 
@@ -26,7 +26,7 @@
 
 
 # 2. Test AVID
-## AVID package includes a dataset, necessary reference, and index for testing. Users can run the command below directly to test the installation without file preparation.
+## AVID package includes a dataset, necessary references, and indexs for testing. Users can directly run the command below to test the installation without any file preparation.
 #### 
 #### [your dir]: your directory where download AVID
 #### [outdir]: output directory
@@ -69,7 +69,7 @@
 
 # 4. Annotation files
 ## 4.1 Human genome
-### Annotation file for the human genome could be found in annotation directory in AVID package or downloaded from annovar database(e.g. hg38_refGene.txt).
+### The annotation file for the human genome can be found in the annotation directory of the AVID package on GitHub or downloaded from the ANNOVAR database (e.g., hg38_refGene.txt).
 ## 4.2 Virus genome
 ### Annotation file for virus genome is bed format.
 | HBV | 0 | 155 | gene | + | PreS2 |
@@ -79,7 +79,7 @@
 
 
 # 5. Run AVID
-### Once index files and annotation files are prepared, users can run AVID.
+### After preparing the index and annotation files, users can run AVID.
 
 #### python [your dir]/AVID/AVID.py 
 #### -1 [your dir]/AVID/testdata/test_1.fastq 
@@ -137,42 +137,24 @@
 |chr5	|2465	|DQ089769.1	|1815	|upstream	|negative	|0	|0	|0	|0	|0	|0	|7	|0	|7	|No	|intergenic	|NONE(dist=NONE),PLEKHG4B(dist=89703)	|X|
 |chr5	|2669	|DQ089769.1	|1818	|upstream	|negative	|0	|0	|0	|0	|0	|0	|9	|0	|9	|No	|intergenic	|NONE(dist=NONE),PLEKHG4B(dist=89499)	|X|![image](https://github.com/xueyinglyu/AVID/assets/78334297/f939bcc2-78ae-40bc-847a-199208398c65)
 
-#### chr_human: 
-#### &emsp;Chromosome of breakpoint in human genome
-#### breakpoint_human:
-#### &emsp;Breakpoint location in human genome
-#### chr_virus:
-#### &emsp;Chromosome of breakpoint in virus genome
-#### breakpoint_virus:
-#### &emsp;Breakpoint location in virus genome
-#### breaktype:
-#### &emsp;breakpoint type, upstream or downstrem of the breakpoint. There are two breakpoints of a HBV insertion event. Upstream and downstream are used to distinguish them.
-#### virus_direction:
-#### &emsp;Strand of virus(positive or negative) inserted into human genome(refer to human positive strand) identified by soft-clip reads
-#### chr_human_chimeric:
-#### &emsp;Chromosome of integration region in human genome identified by clustering chimeric reads 
-#### start_human_chimeric:
-#### &emsp;Start site of the cluster of chimeric reads in human genome
-#### end_human_chimeric:
-#### &emsp;End site of the cluster of chimeric reads in human genome
-#### start_virus_chimeric:
-#### &emsp;Start site of the cluster of chimeric reads in virus genome
-#### end_virus_chimeric:
-#### &emsp;End site of the cluster of chimeric reads in virus genome
-#### support_reads_softclip:
-#### &emsp;The number of soft-clip reads supporting the breakpoint
-#### support_reads_chimeric:
-#### &emsp;The number of clustered chimeric reads supporting the breakpoint
-#### total_reads:
-#### &emsp;Total number of soft-clip reads and chimeric reads supporting the breakpoint
-#### repeat_region:
-#### &emsp;Whether the breakpoint is supported by reads with multi-site mapping (Yes or No). 
-#### region_human:
-#### &emsp;Breakpoint in the region of human genome according to annovar annotation result
-#### gene_human:
-#### &emsp;Breakpoint to the nearest gene in human genome according to annovar annotation result
-#### gene_virus:
-#### &emsp;Breakpoint to the nearest gene in virus genome according to virus annotation file providing by users
+#### chr_human: Chromosome of breakpoint in human genome
+#### breakpoint_human: Breakpoint location in human genome
+#### chr_virus: Chromosome of breakpoint in virus genome
+#### breakpoint_virus: Breakpoint location in virus genome
+#### breaktype: Breakpoint type, upstream or downstrem of the breakpoint. There are two breakpoints of a HBV insertion event. Upstream and downstream are used to distinguish them.
+#### virus_direction: Strand of virus(positive or negative) inserted into human genome(refer to human positive strand) identified by soft-clip reads
+#### chr_human_chimeric: Chromosome of integration region in human genome identified by clustering chimeric reads 
+#### start_human_chimeric: Start site of the cluster of chimeric reads in human genome
+#### end_human_chimeric: End site of the cluster of chimeric reads in human genome
+#### start_virus_chimeric: Start site of the cluster of chimeric reads in virus genome
+#### end_virus_chimeric: End site of the cluster of chimeric reads in virus genome
+#### support_reads_softclip: The number of soft-clip reads supporting the breakpoint
+#### support_reads_chimeric: The number of clustered chimeric reads supporting the breakpoint
+#### total_reads: Total number of soft-clip reads and chimeric reads supporting the breakpoint
+#### repeat_region: Whether the breakpoint is supported by reads with multi-site mapping (Yes or No). 
+#### region_human: Breakpoint in the region of human genome according to annovar annotation result
+#### gene_human: Breakpoint to the nearest gene in human genome according to annovar annotation result
+#### gene_virus: Breakpoint to the nearest gene in virus genome according to virus annotation file providing by users
 
 
 # 8. Visualization
@@ -181,7 +163,57 @@
 ### 8.2 Breakpoint distribution in virus genome
 ![Breakpoints in viral genome](https://github.com/xueyinglyu/AVID/blob/main/virus_hist.png)
 
-# 9. Promblem shooting
+# 9. Tips for AVID users
+
+### 9.1 How to set the parameters?
+#### Parameters are typically configured based on users' needs. If users wish to implement strict parameters to minimize false positive events, they can adjust -l, -q, and -t. Increasing the length of the soft-clip part (-l), mapping quality (-q), and the minimum supporting reads (-t) will help achieve this.
+
+### 9.2 How to choose the solid viral integration events from the result?
+#### The number of supporting soft-clipped reads (support_reads_softclip) serves as valid evidence of viral integration, and users can increase this number if necessary. Integration events within repeat regions can be filtered out by selecting 'No' in the repeat_region column. However, there is a high likelihood of false positive events when repetitive breakpoints in the viral genome occur across multiple instances.
+
+### 9.3 Why some breakpoints in human genome are quite close to each other?
+#### AVID can identify two breakpoints of an integration event, defined by the upstream and downstream events.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
