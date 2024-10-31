@@ -6,10 +6,12 @@ import re
 
 usage=""
 parser=OptionParser(usage=usage)
+parser.add_option('-q',"--quality",dest="quality",help="mapping quality")
 parser.add_option("-i","--infile",dest="infile",help="Input files, sam file")
 parser.add_option('-o',"--outfile",dest="outfile",help="Output file")
 
 (options,args)=parser.parse_args()
+quality=options.quality
 infile=options.infile
 outfile=options.outfile
 
@@ -128,7 +130,7 @@ def softclip_region(start,end,strand):
 	return soft_human
 
 
-def deal_line(line,mark,write_h):
+def deal_line(line,mark,write_h,quality):
 	
 	line=line.strip()
 	arr=line.split("\t")
@@ -137,6 +139,8 @@ def deal_line(line,mark,write_h):
 	read_chr=arr[2]
 	read_start=int(arr[3])
 	read_mqual=int(arr[4])
+	if read_mqual<=int(quality) and mark!="Yes":
+		return "None"
 	read_cigar=arr[5]
 	mate_chr=arr[6]
 	mate_start=int(arr[7])
@@ -150,8 +154,8 @@ def deal_line(line,mark,write_h):
 		read_id=read_id[0:len(read_id)-6]
 	else:
 		read_name=define_pair(read_flag,read_id)
-	cigar_info=re.findall('(\d+)(\w)',read_cigar)
-	softclip_count=re.findall('(\d+)S',read_cigar)
+	cigar_info=re.findall(r'(\d+)(\w)',read_cigar)
+	softclip_count=re.findall(r'(\d+)S',read_cigar)
 	if len(softclip_count)==1:
 		(softclip_start,softclip_end,match_base,mark)=softclip_one(cigar_info)
 	if len(softclip_count)>1:
@@ -203,14 +207,14 @@ for line in IN:
 	if "chrUn_" in line:
 		continue
 	arr2=line.split("\t")
-	multi_mapping_site1=re.findall('XA:Z:(chr.*);	',line)
+	multi_mapping_site1=re.findall('XA:Z:(chr.*);',line)
 	if len(multi_mapping_site1)==0:
 		multi_mapping_site1=re.findall('XA:Z:(chr.*);',line)
 	multi_mapping_site2=re.findall('SA:Z:(chr.*);	',line)
 	if len(multi_mapping_site2)==0:
 		multi_mapping_site2=re.findall('SA:Z:(chr.*);',line)
 	if len(multi_mapping_site1)>0:
-		deal_line(line,"Yes",OUT)
+		deal_line(line,"Yes",OUT,quality)
 		site_list=multi_mapping_site1[0].split(";")
 		line2=line.strip()
 		arr=line2.split("\t")
@@ -242,11 +246,11 @@ for line in IN:
 			arr[3]=k_start
 			arr[5]=k_cigar
 			line2="\t".join(arr)
-			deal_line(line2,"Yes",OUT)
+			deal_line(line2,"Yes",OUT,quality)
 		continue
 
 	if len(multi_mapping_site2)>0:
-		deal_line(line,"Yes",OUT)
+		deal_line(line,"Yes",OUT,quality)
 		site_list=multi_mapping_site2[0].split(";")
 		line2=line.strip()
 		arr=line2.split("\t")
@@ -270,7 +274,7 @@ for line in IN:
 			arr[3]=k_start
 			arr[5]=k_cigar
 			line2="\t".join(arr)
-			deal_line(line2,"Yes",OUT)
+			deal_line(line2,"Yes",OUT,quality)
 		continue
 
 	else:
@@ -278,7 +282,7 @@ for line in IN:
 		arr=line2.split("\t")
 		if "_" in arr[2] and "chr" in arr[2]:
 			continue
-		deal_line(line,"No",OUT)	
+		deal_line(line,"No",OUT,quality)	
 
 
 

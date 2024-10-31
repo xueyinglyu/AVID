@@ -13,6 +13,9 @@ parser.add_option('-s',"--insert_size",dest="insert_size",help="insert size")
 parser.add_option('-t',"--threshold",dest="threshold",help="threshold")
 parser.add_option('-l',"--len",dest="read_len",help="read_len")
 parser.add_option('-v',"--vlen",dest="virus_len",help="virus_len")
+parser.add_option("-S","--filter-insertsize",dest="filter_insert",help="Activate the filtering of DNA fragment insert size (False or True)")
+parser.add_option("-F","--chr-incompatibility",dest="chr_incompatibility",help="Activate the filtering of chromosomal incompatibility (False or True)")
+
 (options,args)=parser.parse_args()
 outdir=options.outdir
 insert_size=options.insert_size
@@ -20,6 +23,8 @@ insert_size=int(float(insert_size))
 threshold=int(float(options.threshold))
 read_len=int(float(options.read_len))
 virus_len=int(float(options.virus_len))
+filter_size=options.filter_insert
+chr_incompatibility=options.chr_incompatibility
 
 
 
@@ -28,7 +33,6 @@ def find_mode(x):
 	return a
 
 ############################################### define integration strand , site and breakpoint ###############################################
-
 
 
 def define_breakpoint(df):
@@ -169,11 +173,6 @@ def calculate_distance(df,insert_size,result,read_len,virus_len,depth=0):
 	virus_list2=virus_list.copy()
 	virus_list2=sorted(virus_list2)
 
-	# human_list=df["start_human"].values.tolist()
-	# virus_list=df["start_virus"].values.tolist()
-	# virus_list2=virus_list.copy()
-	# virus_list2=sorted(virus_list2)
-
 
 	human_max=max(df.iloc[0:reads]["end_human"])
 	human_min=min(df.iloc[0:reads]["start_human"])
@@ -279,7 +278,6 @@ def get_repeat(dat):
 
 def calculate_distance_result(datatmp,result,cutoff,depth=0):
 	depth=depth+1
-	#print(datatmp[["chr_human","breakpoint_human","breaktype"]])
 	datatmp.index=range(len(datatmp.index))
 	site=datatmp["breakpoint_human"]
 	softclip_reads=datatmp["support_reads_softclip"]
@@ -302,10 +300,7 @@ def calculate_distance_result(datatmp,result,cutoff,depth=0):
 	virus_site2=sorted(virus_site[0:reads])
 	if reads > 1:
 		if max([abs(y - x) for x,y in zip(virus_site2[0:reads],virus_site2[1:reads])])>10:    ################## need to cluster virus reads
-			#print(virus_site2[0:reads])
-			#print(virus_site2[1:reads])
 			diff_value_virus=[abs(y - x) for x,y in zip(virus_site2[0:reads],virus_site2[1:reads])]
-			#print(diff_value_virus)
 			diff_value_virus=np.array(diff_value_virus)
 			mark_virus=diff_value_virus<=10
 			if sum(mark_virus)<len(mark_virus):
@@ -313,23 +308,13 @@ def calculate_distance_result(datatmp,result,cutoff,depth=0):
 				reads_virus=reads_virus+1
 			if sum(mark_virus)==len(mark_virus):
 				reads_virus=len(mark_virus)+1
-			#print(reads_virus)
 			tmp_virus=tmp_human.loc[tmp_human['breakpoint_virus'].isin(virus_site2[0:reads_virus])]
 			tmp_virus.index = range(len(tmp_virus.index))
-			#print(tmp_virus[["breakpoint_human","breakpoint_virus","support_reads_softclip"]])
 			if tmp_virus["support_reads_softclip"].astype(int).values.sum()>=cutoff:
-				#print(tmp_virus.loc[0,"chr_human"])
-				#print(int(tmp_virus["breakpoint_human"].astype("int").values.mean()))
-				#print(";".join(tmp_virus["repeat_region"]))
-				#print(tmp_virus["multi_mapping_human"])
 				dd={'chr_human':tmp_virus.loc[0,"chr_human"],'breakpoint_human':int(tmp_virus["breakpoint_human"].astype("int").values.mean()),'chr_virus':tmp_virus.loc[0,"chr_virus"],'breakpoint_virus':int(tmp_virus["breakpoint_virus"].astype("int").values.mean()),'breaktype':tmp_virus.loc[0,"breaktype"],'virus_direction':tmp_virus.loc[0,"virus_direction"], 'support_reads_softclip':tmp_virus["support_reads_softclip"].astype("int").values.sum(),'repeat_region':";".join(tmp_virus["repeat_region"]),'repeat_mark':get_repeat(np.array(tmp_virus["multi_mapping_human"]))}
 				dd=pd.DataFrame(data=dd,index=[0])
-				#print(dd["repeat_mark"])
 				result=pd.concat([result,dd],ignore_index=True)
-				#print(result["repeat_mark"])
-				#print(tmp_human[["breakpoint_human","breakpoint_virus","support_reads_softclip"]])
 				tmp_human=tmp_human.drop(tmp_human.index[tmp_human['breakpoint_virus'].isin(virus_site2[0:reads_virus])])
-				#print(tmp_human[["breakpoint_human","breakpoint_virus","support_reads_softclip"]])
 				datatmp=pd.concat([tmp_human,tmp_human2],ignore_index=True)
 				datatmp.index = range(len(datatmp.index))
 				if len(datatmp.index)>1:
@@ -373,7 +358,6 @@ def calculate_distance_result(datatmp,result,cutoff,depth=0):
 		return result
 
 	datatmp=datatmp.iloc[reads:,]
-	#print(datatmp[["chr_human","breakpoint_human","breaktype"]])
 	datatmp.index = range(len(datatmp.index))
 	if len(datatmp.index)==0:
 		return result
@@ -395,10 +379,6 @@ def Cluster_result(key_uniq,dataframe,cutoff):
 		result_cluster_down=pd.DataFrame(columns=dataframe.columns)
 		datatmp_up=datatmp[(datatmp["breaktype"]=="upstream")]
 		datatmp_down=datatmp[(datatmp["breaktype"]=="downstream")]
-		# print("upstream")
-		# print(datatmp_up[["chr_human","breakpoint_human","breakpoint_virus","breaktype"]])
-		# print("downstream")
-		# print(datatmp_down[["chr_human","breakpoint_human","breakpoint_virus","breaktype"]])
 		distance_result_up=calculate_distance_result(datatmp_up,result_cluster_up,cutoff)
 		distance_result_down=calculate_distance_result(datatmp_down,result_cluster_down,cutoff)
 		distance_result=pd.concat([distance_result_up,distance_result_down],ignore_index=True)
@@ -444,9 +424,11 @@ type1A=HBV_Partial_mapping_data.merge(HBV_Partial_data,on="read_name",suffixes=(
 type1A["read_id"]=type1A["read_id_virus"]
 type1A=type1A.merge(Unmap_HBV_Full_human_data,on="read_id")
 type1A=type1A[~(type1A["read_name_x"]==type1A["read_name_y"])]
-type1A=type1A[type1A["chr_human"]==type1A["chr"]]
-type1A=type1A[abs(type1A["start_human"]-type1A["start"])<int(1.5*insert_size)]   #### sites mapping to human genome are close within 1.5 insert size
-type1A=type1A[(abs(type1A["start_human"]-type1A["end_human"]+type1A["start_virus"]-type1A["end_virus"])<read_len+int(0.1*read_len))&(abs(type1A["start_human"]-type1A["end_human"]+type1A["start_virus"]-type1A["end_virus"])>int(0.8*read_len))] #########  total length (virus+human) no more than 1.2 read len
+if(chr_incompatibility!="False"):
+	type1A=type1A[type1A["chr_human"]==type1A["chr"]]
+if(filter_size!="False"):
+	type1A=type1A[abs(type1A["start_human"]-type1A["start"])<int(1.5*insert_size)]   #### sites mapping to human genome are close within 1.5 insert size
+type1A=type1A[(abs(type1A["start_human"]-type1A["end_human"]+type1A["start_virus"]-type1A["end_virus"])<read_len+int(0.1*read_len))&(abs(type1A["start_human"]-type1A["end_human"]+type1A["start_virus"]-type1A["end_virus"])>int(0.9*read_len))] #########  total length (virus+human) no more than 1.2 read len
 type1A=type1A[~(type1A["strand_human"]==type1A["strand"])]
 type1A_result=define_breakpoint(type1A)
 type1A_result.to_csv("%s/type1A.out"%(outdir),sep='\t',index=False)
@@ -483,8 +465,9 @@ type1B=type1B[type1B["read_id"].isin(Unmap_HBV_Partial_HBV_unmap)]
 type1B=type1B[~(type1B["read_name_x"]==type1B["read_name_y"])]
 
 type1B=type1B[type1B["chr_human"]==type1B["chr"]]
-type1B=type1B[abs(type1B["start_human"]-type1B["start"])<int(1.5*insert_size)]
-type1B=type1B[(abs(type1B["start_human"]-type1B["end_human"]+type1B["start_virus"]-type1B["end_virus"])<read_len+int(0.1*read_len))&(abs(type1B["start_human"]-type1B["end_human"]+type1B["start_virus"]-type1B["end_virus"])>int(0.8*read_len))]
+if(filter_size!="False"):
+	type1B=type1B[abs(type1B["start_human"]-type1B["start"])<int(1.5*insert_size)]
+type1B=type1B[(abs(type1B["start_human"]-type1B["end_human"]+type1B["start_virus"]-type1B["end_virus"])<read_len+int(0.1*read_len))&(abs(type1B["start_human"]-type1B["end_human"]+type1B["start_virus"]-type1B["end_virus"])>int(0.9*read_len))]
 
 type1B=type1B[~(type1B["strand_human"]==type1B["strand"])]
 
@@ -498,7 +481,8 @@ type1C["read_id"]=type1C["read_id_virus"]
 type1C=type1C.merge(Unmap_HBV_Full_human_data,on="read_id")
 type1C=type1C[~(type1C["read_name_x"]==type1C["read_name_y"])]
 type1C=type1C[type1C["chr_human"]==type1C["chr"]]
-type1C=type1C[abs(type1C["start_human"]-type1C["start"])<int(1.5*insert_size)]
+if(filter_size!="False"):
+	type1C=type1C[abs(type1C["start_human"]-type1C["start"])<int(1.5*insert_size)]
 type1C=type1C[(abs(type1C["start_human"]-type1C["end_human"]+type1C["start_virus"]-type1C["end_virus"])<read_len+int(0.1*read_len))&(abs(type1C["start_human"]-type1C["end_human"]+type1C["start_virus"]-type1C["end_virus"])>int(0.9*read_len))]
 type1C=type1C[~(type1C["strand_human"]==type1C["strand"])]
 type1C_result=define_breakpoint(type1C)
@@ -511,8 +495,8 @@ type1D["read_id"]=type1D["read_id_virus"]
 type1D=type1D.merge(Unmap_HBV_Partial_human_data,on="read_id")
 type1D=type1D[~(type1D["read_name_x"]==type1D["read_name_y"])]
 type1D=type1D[type1D["chr_human"]==type1D["chr"]]
-type1D=type1D[abs(type1D["start_human"]-type1D["start"])<int(1.5*insert_size)]
-
+if(filter_size!="False"):
+	type1D=type1D[abs(type1D["start_human"]-type1D["start"])<int(1.5*insert_size)]
 softclip_read_count=type1D.groupby(["read_id"]).size().reset_index(name="read_count")
 softclip_read_count_type1=softclip_read_count[softclip_read_count["read_count"]==1]["read_id"]  
 softclip_read_count_type4=softclip_read_count[softclip_read_count["read_count"]>1]["read_id"]  ######### remove type4 from type1D, type4 double softclip
@@ -548,19 +532,41 @@ type4A_2_raw=type4A_2_raw.rename(columns={'read_id_human':'read_id', 'chr_human'
 type4A_2["read_id"]=type4A_2["read_id_virus"]
 type4A_2=type4A_2.merge(type4A_2_raw,on="read_id")
 type4A_2=type4A_2[~(type4A_2["read_name_x"]==type4A_2["read_name_y"])]
-type4A_2=type4A_2[type4A_2["chr_human"]==type4A_2["chr"]]
-type4A_2=type4A_2[abs(type4A_2["start_human"]-type4A_2["start"])<int(1.5*insert_size)]
 
 
-type4A=type4A_2.copy()
+if (chr_incompatibility=="True" and filter_size=="True"):
+	type4A_2=type4A_2[type4A_2["chr_human"]==type4A_2["chr"]]
+	type4A_2=type4A_2[abs(type4A_2["start_human"]-type4A_2["start"])<int(1.5*insert_size)]
+	type4A=type4A_2.copy()
+	type4_softclip_read_count=type4A.groupby(["read_id"]).size().reset_index(name="read_count")
+	type4_softclip_read_count=type4_softclip_read_count[type4_softclip_read_count["read_count"]>1]["read_id"]
+	type4A=type4A[type4A["read_id"].isin(type4_softclip_read_count)]
+	type4A=type4A[(abs(type4A["start_human"]-type4A["end_human"]+type4A["start_virus"]-type4A["end_virus"])<read_len+int(0.1*read_len))&(abs(type4A["start_human"]-type4A["end_human"]+type4A["start_virus"]-type4A["end_virus"])>int(0.9*read_len))]
+	type4A=type4A[~(type4A["strand_human"]==type4A["strand"])]
+	type4A_result=define_breakpoint(type4A)
 
-type4_softclip_read_count=type4A.groupby(["read_id"]).size().reset_index(name="read_count")
+elif(filter_size=="False" and chr_incompatibility=="True"):
+	type4A_2=type4A_2[type4A_2["chr_human"]==type4A_2["chr"]]
+	type4A=type4A_2.copy()
+	type4_softclip_read_count=type4A.groupby(["read_id"]).size().reset_index(name="read_count")
+	type4_softclip_read_count=type4_softclip_read_count[type4_softclip_read_count["read_count"]>1]["read_id"]
+	type4A=type4A[type4A["read_id"].isin(type4_softclip_read_count)]
+	type4A=type4A[(abs(type4A["start_human"]-type4A["end_human"]+type4A["start_virus"]-type4A["end_virus"])<read_len+int(0.1*read_len))&(abs(type4A["start_human"]-type4A["end_human"]+type4A["start_virus"]-type4A["end_virus"])>int(0.9*read_len))]
+	type4A=type4A[~(type4A["strand_human"]==type4A["strand"])]
+	type4A_result=define_breakpoint(type4A)
 
-type4_softclip_read_count=type4_softclip_read_count[type4_softclip_read_count["read_count"]>1]["read_id"]
-type4A=type4A[type4A["read_id"].isin(type4_softclip_read_count)]
-type4A=type4A[(abs(type4A["start_human"]-type4A["end_human"]+type4A["start_virus"]-type4A["end_virus"])<read_len+int(0.1*read_len))&(abs(type4A["start_human"]-type4A["end_human"]+type4A["start_virus"]-type4A["end_virus"])>int(0.9*read_len))]
-type4A=type4A[~(type4A["strand_human"]==type4A["strand"])]
-type4A_result=define_breakpoint(type4A)
+elif(chr_incompatibility=="False"):
+	type4A=type4A_2.copy()
+	type4_softclip_read_count=type4A.groupby(["read_id"]).size().reset_index(name="read_count")
+	type4_softclip_read_count=type4_softclip_read_count[type4_softclip_read_count["read_count"]>1]["read_id"]
+	type4A=type4A[type4A["read_id"].isin(type4_softclip_read_count)]
+	type4A=type4A[(abs(type4A["start_human"]-type4A["end_human"]+type4A["start_virus"]-type4A["end_virus"])<read_len+int(0.1*read_len))&(abs(type4A["start_human"]-type4A["end_human"]+type4A["start_virus"]-type4A["end_virus"])>int(0.9*read_len))]
+	type4A_result=define_breakpoint(type4A)
+
+
+
+
+
 
 type4A_result.to_csv("%s/type4A.out"%(outdir),sep='\t',index=False)
 type4_result=pd.concat([type4A_result,type4B_result])
@@ -685,15 +691,35 @@ if (len(all_type_result_support_read.index)>0) and (len(type3_result.index)>0):
 	for index_c,row_c in type3_result.iterrows():
 		mark=0
 		for index_s,row_s in all_type_result_cluster.iterrows():
+			# if(filter_size!="False"):
+			# 	if (row_s["chr_human"]==row_c["chr_human"]) and (abs(row_s["breakpoint_human"]-row_c["start_human"])<int(1.5*insert_size) or abs(row_s["breakpoint_human"]-row_c["end_human"])<int(1.5*insert_size)) and (abs(row_s["breakpoint_virus"]-row_c["start_virus"])<int(1.5*insert_size) or abs(row_s["breakpoint_virus"]-row_c["end_virus"])<int(1.5*insert_size)):
+			# 		all_type_result_cluster.loc[index_s,"chr_human_chimeric"]=row_c["chr_human"]
+			# 		all_type_result_cluster.loc[index_s,"start_human_chimeric"]=row_c["start_human"]
+			# 		all_type_result_cluster.loc[index_s,"end_human_chimeric"]=row_c["end_human"]
+			# 		all_type_result_cluster.loc[index_s,"chr_virus_chimeric"]=row_c["chr_virus"]
+			# 		all_type_result_cluster.loc[index_s,"start_virus_chimeric"]=row_c["start_virus"]
+			# 		all_type_result_cluster.loc[index_s,"end_virus_chimeric"]=row_c["end_virus"]
+			# 		all_type_result_cluster.loc[index_s,"support_reads_chimeric"]=int(row_c["supported"])
+			# 		mark=1
+			# if(filter_size=="False"):
+			# 	if (row_s["chr_human"]==row_c["chr_human"]):
+			# 		all_type_result_cluster.loc[index_s,"chr_human_chimeric"]=row_c["chr_human"]
+			# 		all_type_result_cluster.loc[index_s,"start_human_chimeric"]=row_c["start_human"]
+			# 		all_type_result_cluster.loc[index_s,"end_human_chimeric"]=row_c["end_human"]
+			# 		all_type_result_cluster.loc[index_s,"chr_virus_chimeric"]=row_c["chr_virus"]
+			# 		all_type_result_cluster.loc[index_s,"start_virus_chimeric"]=row_c["start_virus"]
+			# 		all_type_result_cluster.loc[index_s,"end_virus_chimeric"]=row_c["end_virus"]
+			# 		all_type_result_cluster.loc[index_s,"support_reads_chimeric"]=int(row_c["supported"])
+			# 		mark=1
 			if (row_s["chr_human"]==row_c["chr_human"]) and (abs(row_s["breakpoint_human"]-row_c["start_human"])<int(1.5*insert_size) or abs(row_s["breakpoint_human"]-row_c["end_human"])<int(1.5*insert_size)) and (abs(row_s["breakpoint_virus"]-row_c["start_virus"])<int(1.5*insert_size) or abs(row_s["breakpoint_virus"]-row_c["end_virus"])<int(1.5*insert_size)):
-				all_type_result_cluster.loc[index_s,"chr_human_chimeric"]=row_c["chr_human"]
-				all_type_result_cluster.loc[index_s,"start_human_chimeric"]=row_c["start_human"]
-				all_type_result_cluster.loc[index_s,"end_human_chimeric"]=row_c["end_human"]
-				all_type_result_cluster.loc[index_s,"chr_virus_chimeric"]=row_c["chr_virus"]
-				all_type_result_cluster.loc[index_s,"start_virus_chimeric"]=row_c["start_virus"]
-				all_type_result_cluster.loc[index_s,"end_virus_chimeric"]=row_c["end_virus"]
-				all_type_result_cluster.loc[index_s,"support_reads_chimeric"]=int(row_c["supported"])
-				mark=1
+					all_type_result_cluster.loc[index_s,"chr_human_chimeric"]=row_c["chr_human"]
+					all_type_result_cluster.loc[index_s,"start_human_chimeric"]=row_c["start_human"]
+					all_type_result_cluster.loc[index_s,"end_human_chimeric"]=row_c["end_human"]
+					all_type_result_cluster.loc[index_s,"chr_virus_chimeric"]=row_c["chr_virus"]
+					all_type_result_cluster.loc[index_s,"start_virus_chimeric"]=row_c["start_virus"]
+					all_type_result_cluster.loc[index_s,"end_virus_chimeric"]=row_c["end_virus"]
+					all_type_result_cluster.loc[index_s,"support_reads_chimeric"]=int(row_c["supported"])
+					mark=1
 
 
 		if mark==0:
@@ -723,7 +749,6 @@ if (len(all_type_result_support_read.index)>0) and (len(type3_result.index)>0):
 	all_type_result_cluster=all_type_result_cluster.sort_values(by=['chr_human','breakpoint_human'])
 	all_type_result_cluster=all_type_result_cluster.drop(columns=["key"])
 	all_type_result_cluster=pd.concat([all_type_result_cluster,chimeric_result],ignore_index=True)
-	#all_type_result_cluster=all_type_result_cluster[(all_type_result_cluster["total_reads"]>=threshold)]
 	all_type_result_cluster=all_type_result_cluster[["chr_human","breakpoint_human","chr_virus","breakpoint_virus","breaktype","virus_direction","chr_human_chimeric","start_human_chimeric","end_human_chimeric","chr_virus_chimeric","start_virus_chimeric","end_virus_chimeric","support_reads_softclip","support_reads_chimeric","total_reads","repeat_region","repeat_mark"]]
 
 ################################# if breakpoints does not exist and clusters exist #################################

@@ -14,7 +14,7 @@ infile=options.infile
 outfile=options.outfile
 
 if not os.path.exists(infile):
-	print("input file does not exist......\n")
+	print("input file does not exist (from subtype result)......\n")
 
 IN=open(infile,'r')
 OUT=open(outfile,'w')
