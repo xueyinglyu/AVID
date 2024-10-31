@@ -156,7 +156,7 @@
 #### Parameters are typically configured based on users' needs. If users wish to implement strict parameters to minimize false positive events, they can adjust -l, -q, and -t. Increasing the length of the soft-clip part (-l), mapping quality (-q), and the minimum supporting reads (-t) will help achieve this.
 
 ### 9.2 How to choose the solid viral integration events from the result?
-#### The number of supporting soft-clipped reads (support_reads_softclip) serves as valid evidence of viral integration, and users can increase this number if necessary. Integration events within repeat regions can be filtered out by selecting 'No' in the repeat_region column. However, there is a high likelihood of false positive events when repetitive breakpoints in the viral genome occur across multiple instances.
+#### The number of supporting soft-clipped reads (support_reads_softclip) serves as valid evidence of viral integration, and users can increase this number if necessary. Integration events within repeat regions can be filtered out by selecting 'No' in the repeat_region column. There is a high likelihood of false positive events when repetitive breakpoints in the viral genome occur across multiple instances.
 
 ### 9.3 Why some breakpoints in human genome are quite close to each other?
 #### AVID can identify two breakpoints of an integration event, defined by the upstream and downstream events.
