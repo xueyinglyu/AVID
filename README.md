@@ -18,8 +18,9 @@
 
 
 ## 1.2 Github
-#### 1.2.1 git clone https://github.com/xueyinglyu/AVID.git
-#### 1.2.2 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
+#### 1.2.1 PATH=$PATH:/usr/libexec/git-core
+#### 1.2.2 git clone https://github.com/xueyinglyu/AVID.git
+#### 1.2.3 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:[your dir]/AVID/"
 #### (e.g. export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/lyuxueying/test/AVID/")
 #### [your dir]: Directory where you download AVID.
 
