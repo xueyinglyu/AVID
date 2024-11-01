@@ -58,7 +58,7 @@
 ## 4.1 Human genome
 ### The annotation file for the human genome can be found in the annotation directory of the AVID package on GitHub or downloaded from the ANNOVAR database (e.g., hg38_refGene.txt).
 ## 4.2 Virus genome
-### Annotation file for virus genome is bed format.
+### Annotation file for virus genome is bed format. e.g.:
 | HBV | 0 | 155 | gene | + | PreS2 |
 | -------- | -------- | -------- | -------- | -------- | -------- |
 | HBV | 155 | 835 | gene | + | S |
@@ -75,7 +75,7 @@
 #### -p [your dir]/AVID/testdata/DQ089769 
 #### -H [your dir]/AVID/testdata/chr5.fa 
 #### -a [your dir]/AVID/testdata/DQ089769.bed 
-#### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -`I` 250 -T DNA
+#### -l 10 -q 10 -t 1 -@ 1 -v hg38 -R 100 -`I` 10000 -T DNA
 
 # 6. Parameters
 #### -1,--fastq1:
