@@ -17,7 +17,7 @@ import pandas
 
 def main ():
 
-	usage="python AVID.py -1 test_R1.fq.gz -2 test_R2.fq.gz -d /output/dir/ -s test -r virus_bwa_index.fa -g hg19_blastn_index -p virus_blastn_index -H hg19_bwa_index.fa -l 10 -q 10 -t 3 -@ 8 -v hg19 -a virus_annotation.bed -R read_len -I insert_size -F True -S True"
+	usage="python AVID.py -1 -2 -d -r -p -H -a -l -q -@ -R -I -s"
 	parser=OptionParser(usage=usage)
 	parser.add_option("-1","--fastq1",dest="fastq1",help="fastq file read1")
 	parser.add_option("-2","--fastq2",dest="fastq2",help="fastq file read2")
@@ -60,10 +60,15 @@ def main ():
 
 	AVID_PATH = os.path.dirname(os.path.realpath(__file__))
 	print(AVID_PATH)
+	print("\n")
 
 	bin_PATH=AVID_PATH+"/3rdParty/bin/"
 	
 	r_PATH=AVID_PATH+"/R/bin/"
+
+
+
+
 
 
 
@@ -137,7 +142,39 @@ def main ():
 
 	if not os.path.exists("%s/blastn"%(bin_PATH)):
 		print("Error: blastn has not intalled!")
+		sys.exit()
+
+	if None in (options.fastq1, options.fastq2, options.directory, options.reference, options.pathogen, options.human_index, options.virus_annotation, options.minlen, options.quality, options.threads, options.read_len, options.insert, options.sample):
+		print("Error: All parameters must be provided.\n")
+		parser.print_help()
+		sys.exit()
+
+	if not os.path.exists(fastq1):
+		print("Error: -1 -2, input fastq file does not find!\n")
+		parser.print_help()
+		sys.exit()
+
+	if not os.path.exists(virus_bwa):
+		print("Error: -r virus BWA reference does not find!\n")
+		parser.print_help()
+		sys.exit()
+
+	if not os.path.exists(pathogen_blastn):
+		print("Error: -p  virus BLASTN reference does not find!\n")
+		parser.print_help()
+		sys.exit()		
+
+	if not os.path.exists(host_bwa):
+		print("Error: -H  human BWA reference does not find!\n")
+		parser.print_help()
 		sys.exit()	
+
+
+	if not os.path.exists(virus_annotation):
+		print("Error: -a  viral annotation file does not find!")
+		parser.print_help()
+		sys.exit()
+
 		
 	print("###############################################################\n")
 	print("All tools are installed !\n")
