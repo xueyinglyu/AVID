@@ -159,7 +159,7 @@ def main ():
 		parser.print_help()
 		sys.exit()
 
-	if not os.path.exists(pathogen_blastn):
+	if not os.path.exists(pathogen_blastn+".nhr"):
 		print("Error: -p  virus BLASTN reference does not find!\n")
 		parser.print_help()
 		sys.exit()		
