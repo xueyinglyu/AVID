@@ -316,19 +316,20 @@ def main ():
 		os.system("touch %s/%s.AVID.txt"%(directory,sample))
 		os.system("touch %s/%s.AVID.final.txt"%(directory,sample))
 
-	os.system("rm %s/*.out"%(directory))
-	os.system("rm %s/*.sam"%(directory))
-	os.system("rm %s/*.fasta"%(directory))
-	os.system("rm %s/type*"%(directory))
-	os.system("rm %s/*.AVID.txt"%(directory))
-#	os.system("rm %s/*.virus.insert"%(directory))
+
 
 	if(os.path.exists("%s/plot/circos_plot.pdf"%(directory))):
 		print("\nSTEP6: Done!\n")
 	else:
 		print("STEP6: ERROR!")
 		sys.exit()
-
+		
+	os.system("rm %s/*.out"%(directory))
+	os.system("rm %s/*.sam"%(directory))
+	os.system("rm %s/*.fasta"%(directory))
+	os.system("rm %s/type*"%(directory))
+	os.system("rm %s/*.AVID.txt"%(directory))
+#	os.system("rm %s/*.virus.insert"%(directory))
 	print("###############################################################\n")
 	print("\n\nAVID COMPLETED!!!\n\nPlease check the result in %s\n"%(directory))
 
