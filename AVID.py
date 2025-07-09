@@ -318,7 +318,7 @@ def main ():
 
 
 
-	if(os.path.exists("%s/plot/circos_plot.pdf"%(directory))):
+	if(os.path.exists("%s/plot/circos_plot.pdf"%(directory)) or os.stat("%s/%s.AVID.final.txt"%(directory,sample)).st_size==0):
 		print("\nSTEP6: Done!\n")
 	else:
 		print("STEP6: ERROR!")
